@@ -52,28 +52,28 @@ for k0 in keys_0:
 		for k10 in keys_10:
 			for k15 in keys_15:
 				key_guess = [chr(k0)] + [chr(0)]*4 + [chr(k5)] + [chr(0)]*4 + [chr(k10)] + [chr(0)]*4 + [chr(k15)]
-					one_round_crypt = AES_128(1, True)
-					one_round_crypt.key = key_guess
-					xp = one_round_crypt.cipher(''.join(p1))
-					yp = one_round_crypt.cipher(''.join(p2))
+				one_round_crypt = AES_128(1, True)
+				one_round_crypt.key = key_guess
+				xp = one_round_crypt.cipher(''.join(p1))
+				yp = one_round_crypt.cipher(''.join(p2))
 
-					zp = xp[:]
-					wp = yp[:]
-					zp[4]  = yp[4]
-					zp[12] = yp[12]
-					wp[4]  = xp[4]
-					wp[12] = xp[12]
-					p3 = one_round_crypt.inv_cipher(''.join(zp))
-					p4 = one_round_crypt.inv_cipher(''.join(wp))
+				zp = xp[:]
+				wp = yp[:]
+				zp[4]  = yp[4]
+				zp[12] = yp[12]
+				wp[4]  = xp[4]
+				wp[12] = xp[12]
+				p3 = one_round_crypt.inv_cipher(''.join(zp))
+				p4 = one_round_crypt.inv_cipher(''.join(wp))
 
-					crypt = AES_128(5)
-					crypt.key = key_guess
-					c3 = crypt.cipher(''.join(p3))
-					c4 = crypt.cipher(''.join(p4))
-					if ((c3[0]==c4[0]) and (c3[7]==c4[7]) and (c3[10]==c4[10]) and (c3[13]==c4[13])):
-						print(key_guess)
-						print("Grassi: Success")
-						break
+				crypt = AES_128(5)
+				crypt.key = key_guess
+				c3 = crypt.cipher(''.join(p3))
+				c4 = crypt.cipher(''.join(p4))
+				if ((c3[0]==c4[0]) and (c3[7]==c4[7]) and (c3[10]==c4[10]) and (c3[13]==c4[13])):
+					print(key_guess)
+					print("Grassi: Success")
+					break
 
 
 
